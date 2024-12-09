@@ -3,6 +3,10 @@ import { cors } from "hono/cors";
 import { pinata } from "./pinata";
 import { clerkMiddleware, getAuth } from "@hono/clerk-auth";
 
+interface UrlObject {
+	url: string;
+}
+
 const app = new Hono();
 app.use("/*", cors());
 app.use("*", clerkMiddleware());
@@ -62,7 +66,8 @@ app.get("/files", async (c) => {
 				user: auth.userId,
 			})
 			.limit(10);
-		const urls: any = [];
+
+		const urls: UrlObject[] = [];
 
 		for (const file of files.files) {
 			const url = await pinata.gateways

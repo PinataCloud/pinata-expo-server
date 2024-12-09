@@ -3,3 +3,4 @@ node_modules/
 guestbook/
 
 .env
+.DS_Store
